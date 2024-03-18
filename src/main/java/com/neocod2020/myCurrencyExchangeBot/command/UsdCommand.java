@@ -16,7 +16,7 @@ public class UsdCommand implements Command {
     private final ExchangeRatesService exchangeRatesService;
     private final SendMessageService sendMessageService;
 
-    private String USD_COMMAND_TEXT = "%s USD exchange rate is %s RUR";
+    public static String USD_COMMAND_TEXT = "%s USD exchange rate is %s RUR";
     private String NO_USD_RATES = "Failed to retreive USD exchange rate. Try later";
 
     public UsdCommand(ExchangeRatesService exchangeRatesService, SendMessageService sendMessageService) {

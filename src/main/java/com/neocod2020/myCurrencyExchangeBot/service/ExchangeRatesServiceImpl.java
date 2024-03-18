@@ -54,7 +54,7 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
         }
         return "";
     }
-//      the same method creating "document" via DocumentBuilder
+//      the same method created "document" via DocumentBuilder
 //    private static String extractCurrencyValueFromXML(String xml, String xpathExpression) {
 //        try {
 //            InputSource source = new InputSource(new StringReader(xml));

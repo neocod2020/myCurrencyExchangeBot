@@ -2,6 +2,7 @@ package com.neocod2020.myCurrencyExchangeBot.client;
 
 import java.io.IOException;
 import java.util.Optional;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -22,8 +23,9 @@ public class CbrClient {
     @Autowired
     private OkHttpClient okHttpClient;
 
+    @Getter
     @Value("${cbr.currency.rates.xml.url}")
-    private String cbrCurrencyRatesXmlUrl;
+    public String cbrCurrencyRatesXmlUrl;
 
     public Optional<String> getCurrencyRatesXML() {
 
