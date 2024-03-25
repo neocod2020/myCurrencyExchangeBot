@@ -9,6 +9,8 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -28,12 +30,16 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
     }
 
     @Override
+    @Cacheable(value = "usd", unless = "#result == null or #result.isEmpty()")
     public String getUSDExchangeRate() throws Exception {
+        log.info("getUSDExchangeRate");
         return extractCurrencyValueFromXML(getXML(), USD_XPATH);
     }
 
     @Override
+    @Cacheable(value = "eur", unless = "#result == null or #result.isEmpty()")
     public String getEURExchangeRate() throws Exception {
+        log.info("getEURExchangeRate");
         return extractCurrencyValueFromXML(getXML(), EUR_XPATH);
     }
 
@@ -44,6 +50,7 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
     }
 
     private static String extractCurrencyValueFromXML(String xml, String xpathExpression) {
+        log.info("extractCurrencyValueFromXML");
         InputSource source = new InputSource(new StringReader(xml));
         XPath xpath = XPathFactory.newInstance().newXPath();
         try {
@@ -76,5 +83,17 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
 //        }
 //        return null;
 //    }
+
+    @Override
+    @CacheEvict("usd")
+    public void clearUSDcache() {
+        log.info("Cache \"usd\" cleared!");
+    }
+
+    @Override
+    @CacheEvict("eur")
+    public void clearEURcache() {
+        log.info("Cache \"eur\" cleared!");
+    }
 
 }

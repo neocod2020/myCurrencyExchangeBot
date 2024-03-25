@@ -7,4 +7,6 @@ package com.neocod2020.myCurrencyExchangeBot.service;
 public interface ExchangeRatesService {
     String getUSDExchangeRate() throws Exception;
     String getEURExchangeRate() throws Exception;
+    void clearUSDcache();
+    void clearEURcache();
 }
